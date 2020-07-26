@@ -43,7 +43,9 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ```
 You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.
 
-<span style="color:red">**IMPORTANT!**</span> Make sure you change your **SECURITY KEY** to something secure.
+```diff
+- IMPORTANT! Make sure you change your **SECURITY KEY** to something secure.
+```
 
 ### Start the server
 ```bash
