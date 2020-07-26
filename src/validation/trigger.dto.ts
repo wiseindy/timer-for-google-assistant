@@ -1,11 +1,16 @@
 import { IsNotEmpty, IsNumberString, IsString } from 'class-validator';
 
 export class TriggerDto {
-  @IsString()
+
   @IsNotEmpty()
+  @IsString()
   key: string;
 
   @IsNotEmpty()
+  @IsString()
+  deviceName: string;
+
   @IsNumberString()
-  duration: number;
+  @IsNotEmpty()
+  durationInSeconds: number;
 }
