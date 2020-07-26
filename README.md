@@ -23,14 +23,14 @@ This application uses [IFTTT](https://ifttt.com/) to communicate with Google Ass
 
 ### Clone this repository
 ```bash
-$ git clone https://github.com/wiseindy/timer-for-google-assistant.git
+git clone https://github.com/wiseindy/timer-for-google-assistant.git
 ```
 
 ### Enter the directory and run `npm install`
 
 ```bash
-$ cd timer-for-google-assistant
-$ npm install
+cd timer-for-google-assistant
+npm install
 ```
 
 ### Create a `.env` file in the root directory. Sample values can be seen in `.env.example`
@@ -59,26 +59,26 @@ npm start
 
 ```bash
 # development
-$ npm run start
+npm run start
 
 # watch mode
-$ npm run start:dev
+npm run start:dev
 
 # production mode
-$ npm run start:prod
+npm run start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+npm run test
 
 # e2e tests
-$ npm run test:e2e
+npm run test:e2e
 
 # test coverage
-$ npm run test:cov
+npm run test:cov
 ```
 
 
