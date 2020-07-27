@@ -119,7 +119,7 @@ For the Body parameter, specify the following values:\
 
 Sample request body:
 
-```json
+```
 {
   "key":"ChangeThisToSomethingSecure",
   "durationInMinutes":{{NumberField}},
@@ -184,9 +184,8 @@ Content type: `application/json`
 }
 ```
 
-## Stay in touch
+## Author
 
-- Author - [Wiseindy](https://wiseindy.com)
 - Website - [https://wiseindy.com](https://wiseindy.com/)
 - Twitter - [@wiseindy](https://twitter.com/wiseindy)
 
