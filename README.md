@@ -41,11 +41,20 @@ IFTTT_EVENT_OFF_SUFFIX=_off
 IFTTT_EVENT_ON_SUFFIX=_on
 IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ```
-You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.
-
+* `PORT`: This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy.
+* `SECURITY_KEY`: Set this to a unique string and do not share it with anyone.
 ```diff
 - IMPORTANT! Make sure you change your SECURITY KEY to something secure.
 ```
+* `IFTTT_EVENT_OFF_SUFFIX`: The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
+* `IFTTT_EVENT_ON_SUFFIX`: The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
+
+You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.
+
+![IFTTT Webhooks page screenshot](/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
+
+![IFTTT Webhooks key page screenshot](/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
+
 
 ### Start the server
 ```bash
@@ -56,6 +65,8 @@ npm start
 ```bash
 // To-do
 ```
+
+You will be creating two actions in IFTTT; one to turn off the device and another to turn it on. 
 
 ## Running the app
 
