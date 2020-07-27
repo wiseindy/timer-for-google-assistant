@@ -12,5 +12,5 @@ export class TriggerDto {
 
   @IsNumberString()
   @IsNotEmpty()
-  durationInSeconds: number;
+  durationInMinutes: number;
 }
