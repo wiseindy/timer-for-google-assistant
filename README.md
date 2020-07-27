@@ -54,6 +54,15 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 \
 ![IFTTT Webhooks key page screenshot](/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
 
+### Start the application
+```bash
+npm run start:prod
+```
+
+For more options, view [Running the app](#running-the-app) section.
+
+---
+
 ### Integrate with IFTTT
 
 You will be creating two actions in IFTTT; one to turn off the device and another to turn it on. 
@@ -98,22 +107,30 @@ For example, if the device is a smart light, use `lights_off` and `lights_on` as
 \
 ![IFTTT set target to webhooks web request](/assets/ifttt_google_assistant_trigger_event_target.gif?raw=true "IFTTT set target to webhooks web request")
 
-5. For the URL field, type in the domain/IP of your webserver running this application.\
+5. Fill the action fields with the following values. For more information, refer to the [API Reference](#api-reference) below.\
 \
-The API endpoint that handles requests is `/trigger`.
+For the `URL` field, type in the domain/IP of your webserver running this application.\
+The API endpoint that handles requests is `/trigger`.\
 Set the web request method to `POST`.\
 Select `application/json` as Content Type.\
 For the Body parameter, specify the following values:\
 \
 ![IFTTT web request action](/assets/ifttt_webhooks_make_http_request.png?raw=true "IFTTT web request action")
 
+Sample request body:
+
 ```json
 {
   "key":"ChangeThisToSomethingSecure",
-  "durationInMinutes":"{{NumberField}}",
+  "durationInMinutes":{{NumberField}},
   "deviceName":"lights"
 }
 ```
+
+* Make sure to use the same `key` that you specified in the `.env` file.
+* The device name `lights` should match the name used to create OFF/ON events: `lights_off` and `lights_on`. These values are case-sensitive.
+
+---
 
 ## Running the app
 
@@ -141,6 +158,30 @@ npm run test:e2e
 
 # test coverage
 npm run test:cov
+```
+
+## API Reference
+
+### Usage
+`POST /trigger`
+
+### Request body
+
+Content type: `application/json`
+
+| Name                    |   Type   |  Required |
+|-------------------------|:--------:|----------:|
+| *key*                   |  string  |    Yes    |
+| *durationInMinutes*     |  number  |    Yes    |
+| *deviceName*            |  string  |    Yes    |
+
+#### Example
+```json
+{
+  "key":"ChangeThisToSomethingSecure",
+  "durationInMinutes":20,
+  "deviceName":"lights"
+}
 ```
 
 ## Stay in touch
