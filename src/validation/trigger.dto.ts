@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumberString, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class TriggerDto {
 
@@ -10,7 +10,7 @@ export class TriggerDto {
   @IsString()
   deviceName: string;
 
-  @IsNumberString()
+  @IsNumber()
   @IsNotEmpty()
   durationInMinutes: number;
 }
