@@ -24,12 +24,12 @@ It uses [IFTTT](https://ifttt.com/) to communicate with Google Assistant and you
 ### Request body
 
 Content type: `application/json`
-| Name                    | Type    | Required | Default value | Description                                                                                    |
-|:------------------------|:--------|:---------|:--------------|:-----------------------------------------------------------------------------------------------|
-| *key*                   | string  | *Yes*    | -             | This key should be the match the key specified while setting up the server.                    |
-| *durationInMinutes*     | number  | *Yes*    | -             | Number of minutes after which the action should be triggered.                                  | 
-| *deviceName*            | string  | *Yes*    | -             | Name of the target device.                                                                     |
-| *targetState*           | boolean | No       | `false`       | What should the state of the device be *after* to firing the event? `true` = ON; `false` = OFF | 
+| Name                    | Type      | Required | Default value | Description                                                                                    |
+|:------------------------|:----------|:---------|:--------------|:-----------------------------------------------------------------------------------------------|
+| *key*                   | `string`  | **Yes**  | -             | This key should be the match the key specified while setting up the server.                    |
+| *durationInMinutes*     | `number`  | **Yes**  | -             | Number of minutes after which the action should be triggered.                                  | 
+| *deviceName*            | `string`  | **Yes**  | -             | Name of the target device.                                                                     |
+| *targetState*           | `boolean` | No       | `false`       | What should the state of the device be *after* to firing the event? `true` = ON; `false` = OFF | 
 
 #### Example
 
@@ -40,15 +40,16 @@ Making a `POST` request with the parameters below will set the `lights` to `OFF`
   "key":"ChangeThisToSomethingSecure",
   "durationInMinutes":20,
   "deviceName":"lights",
-  "targetState":true
+  "targetState":false
 }
 ```
 
 #### A note on the `targetState` parameter
 
-If `targetState` is set to `true`, the device will be first turned `OFF` upon receiving this command. After the specified time has elapsed, the device will be turned `ON`. This is an optional parameter and by default, `targetState` is `true`.
+If `targetState` is set to `false` (i.e., OFF), the device will be first turned `ON` upon receiving this command. After the specified time has elapsed, the device will be turned `OFF`. This is an optional parameter and by default, `targetState` is `false`.
 
-If `targetState` is set to `false`, it will do the opposite. The device will be first turned `ON` upon receiving this command. After the specified time has elapsed, the device will be turned `OFF`.
+If `targetState` is set to `true` (i.e., ON), it will do the opposite. The device will be first turned `OFF` upon receiving this command. After the specified time has elapsed, the device will be turned `ON`. 
+
 
 ## Prerequisites
 
