@@ -1,6 +1,6 @@
-# Timer for Google Assistant
-
 ![Timer for Google Assistant](/assets/timer-for-google-assistant.png?raw=true "Timer for Google Assistant")
+
+## Description
 
 Wouldn't it be cool if you could say stuff like:
 
@@ -10,7 +10,7 @@ Wouldn't it be cool if you could say stuff like:
 
 Well, this project makes it possible. **Timer for Google Assistant** allows you to send commands to Google Assistant that will execute after a certain time.
 
-## Description
+## How does it work?
 
 **Timer for Google Assistant** provides a simple API with which you can schedule commands. See [API Reference](#api-reference) below.
 
