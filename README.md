@@ -29,7 +29,7 @@ Content type: `application/json`
 | *key*                   | string  | *Yes*    | -             | This key should be the match the key specified while setting up the server.                |
 | *durationInMinutes*     | number  | *Yes*    | -             | Number of minutes after which the action should be triggered.                              | 
 | *deviceName*            | string  | *Yes*    | -             | Name of the target device.                                                                 |
-| *targetState*           | boolean | No       | false         | What should the state of the device be *after* to firing the event? true = ON; false = OFF | 
+| *targetState*           | boolean | No       | `false`       | What should the state of the device be *after* to firing the event? true = ON; false = OFF | 
 
 #### Example
 
