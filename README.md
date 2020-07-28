@@ -46,9 +46,9 @@ Making a `POST` request with the parameters below will set the `lights` to `OFF`
 
 #### A note on the `targetState` parameter
 
-If `targetState` set to `true` means the device will be first turned `OFF` upon receiving this command. After the specified time has elapsed, the device will be turned `ON` . This is an optional parameter and by default, `targetState` is `true`.
+If `targetState` is set to `true`, the device will be first turned `OFF` upon receiving this command. After the specified time has elapsed, the device will be turned `ON`. This is an optional parameter and by default, `targetState` is `true`.
 
-If `targetState` is set to `false` , it will do the opposite. The device will be first turned `ON` upon receiving this command. After the specified time has elapsed, the device will be turned `OFF` .
+If `targetState` is set to `false`, it will do the opposite. The device will be first turned `ON` upon receiving this command. After the specified time has elapsed, the device will be turned `OFF`.
 
 ## Prerequisites
 
@@ -116,13 +116,13 @@ Both these actions/applets will work by receiving a web request and triggering t
 
 #### Set up webhooks
 
-1. Login to your [IFTTT](https://ifttt.com/) and create a new applet. For the `this` trigger, choose `Webhooks` .\
+1. Login to your [IFTTT](https://ifttt.com/) and create a new applet. For the `this` trigger, choose `Webhooks`.\
 \
 ![IFTTT create a new applet](/assets/ifttt_webhooks_create.gif?raw=true "IFTTT create a new applet")
 
 2. Follow a consistent naming scheme for all events. Use the correct suffixes for your device events as specified in the `IFTTT_EVENT_OFF_SUFFIX` and `IFTTT_EVENT_ON_SUFFIX` parameters in the `.env` file above.\
 \
-For example, if the device is a smart light, use `lights_off` and `lights_on` as the event names to turn the light OFF and ON respectively. DO NOT use inconsistent names like `lights_off` and `LIGHT_ON` .\
+For example, if the device is a smart light, use `lights_off` and `lights_on` as the event names to turn the light OFF and ON respectively. DO NOT use inconsistent names like `lights_off` and `LIGHT_ON`.\
 \
 **Make sure you follow the SAME naming scheme for ALL events (they're case sensitive)**. \
 \
@@ -136,7 +136,7 @@ For example, if the device is a smart light, use `lights_off` and `lights_on` as
 
 #### Configure IFTTT to receive commands from Google Assistant and forward to your server
 
-1. Create a new applet/action in IFTTT. For the `this` trigger, choose `Google Assistant` .\
+1. Create a new applet/action in IFTTT. For the `this` trigger, choose `Google Assistant`.\
 \
 ![IFTTT create a new Google Assistant applet](/assets/ifttt_webhooks_create_google_assistant.gif?raw=true "IFTTT create a new Google Assistant applet")
 
@@ -148,15 +148,15 @@ For example, if the device is a smart light, use `lights_off` and `lights_on` as
 \
 ![IFTTT Google Assistant number trigger](/assets/ifttt_google_assistant_number_trigger.png?raw=true "IFTTT Google Assistant number trigger")
 
-4. For the `that` action in your applet, select `Webhooks` . This will be used to make a web request to your server.\
+4. For the `that` action in your applet, select `Webhooks`. This will be used to make a web request to your server.\
 \
 ![IFTTT set target to webhooks web request](/assets/ifttt_google_assistant_trigger_event_target.gif?raw=true "IFTTT set target to webhooks web request")
 
 5. Fill the action fields with the following values. For more information, refer to the [API Reference](#api-reference) below.\
 \
 For the `URL` field, type in the domain/IP of your webserver running this application.\
-The API endpoint that handles requests is `/trigger` .\
-Set the web request method to `POST` .\
+The API endpoint that handles requests is `/trigger`.\
+Set the web request method to `POST`.\
 Select `application/json` as Content Type.\
 For the Body parameter, specify the following values:\
 \
@@ -173,7 +173,7 @@ Sample request body:
 ```
 
 * Make sure to use the same `key` that you specified in the `.env` file.
-* The device name `lights` should match the name used to create OFF/ON events: `lights_off` and `lights_on` . These values are case-sensitive.
+* The device name `lights` should match the name used to create OFF/ON events: `lights_off` and `lights_on`. These values are case-sensitive.
 
 ---
 
