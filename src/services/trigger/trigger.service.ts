@@ -1,4 +1,4 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { Injectable, HttpService, HttpException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DeviceService } from '../device/device.service';
 import { Device } from 'src/models';
@@ -21,19 +21,28 @@ export class TriggerService {
     this.onEvent = this.configService.get<string>('IFTTT_EVENT_ON_SUFFIX') || '_on';
   }
 
-  public trigger(deviceName: string, durationInMinutes: number) {
+  public trigger(deviceName: string, durationInMinutes: number, targetState: boolean) {
     const timestamp = new Date();
     const device: Device = {
       name: deviceName,
       added: timestamp,
+      targetState,
       expiry: new Date(timestamp.getTime() + durationInMinutes * 60000),
     }
-    this.deviceService.add(device)
-    this.iftttTrigger(`${device.name}${this.onEvent}`)
+    this.deviceService.add(device);
+    let eventType = this.onEvent;
+    // If targetState is to turn the device ON (true), set current state to OFF
+    if (targetState) {
+      eventType = this.offEvent;
+    }
+    return this.iftttTrigger(`${device.name}${eventType}`)
   }
 
   private async iftttTrigger(eventName: string) {
-    return await this.httpService.get(`https://maker.ifttt.com/trigger/${eventName}/with/key/${this.key}`).toPromise();
+    return await this.httpService.get(`https://maker.ifttt.com/trigger/${eventName}/with/key/${this.key}`).toPromise()
+      .catch(e => {
+        throw new HttpException(`Unable to communicate with IFTTT: ${e.response.statusText}`, e.response.status)
+      });
   }
 
   private checkTime(device: Device): boolean {
@@ -41,7 +50,11 @@ export class TriggerService {
       const now = new Date();
       if ((device.expiry.getTime() - now.getTime()) <= 0) {
         this.deviceService.remove(device);
-        this.iftttTrigger(`${device.name}${this.offEvent}`);
+        let eventType = this.onEvent;
+        if (!device.targetState) {
+          eventType = this.offEvent;
+        }
+        this.iftttTrigger(`${device.name}${eventType}`);
       }
     }
     return false;

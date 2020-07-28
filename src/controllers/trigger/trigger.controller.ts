@@ -1,4 +1,4 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { TriggerDto } from 'src/validation';
 import { ConfigService } from '@nestjs/config';
 import { TriggerService } from 'src/services/trigger';
@@ -12,10 +12,18 @@ export class TriggerController {
   ) { }
 
   @Post()
-  trigger(@Body() body: TriggerDto) {
+  async trigger(@Body() body: TriggerDto) {
     this.validateKey(body.key);
-    this.triggerService.trigger(body.deviceName, body.durationInMinutes);
-    return true;
+    const triggerResult = await this.triggerService.trigger(body.deviceName, body.durationInMinutes, body.targetState);
+    if (triggerResult) {
+      if (triggerResult.data) {
+        return {
+          success: true,
+          message: triggerResult.data
+        }
+      }
+    }
+    throw new InternalServerErrorException('Unable to create trigger')
   }
 
   private validateKey(key: string) {

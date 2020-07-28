@@ -1,6 +1,6 @@
 {
   "name": "timer-for-google-assistant",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Allows you to send commands to Google Assistant that will execute after a certain time.",
   "author": "wiseindy",
   "license": "MIT",

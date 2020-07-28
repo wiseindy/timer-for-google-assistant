@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsOptional, IsBoolean } from 'class-validator';
 
 export class TriggerDto {
 
@@ -13,4 +13,8 @@ export class TriggerDto {
   @IsNumber()
   @IsNotEmpty()
   durationInMinutes: number;
+
+  @IsBoolean()
+  @IsOptional()
+  targetState? = false;
 }
