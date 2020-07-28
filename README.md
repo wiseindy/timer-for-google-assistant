@@ -1,5 +1,7 @@
 # Timer for Google Assistant
 
+![Timer for Google Assistant](/assets/timer-for-google-assistant.png?raw=true "Timer for Google Assistant")
+
 Wouldn't it be cool if you could say stuff like:
 
 * *"Hey Google, turn off the lights after 10 minutes"*
