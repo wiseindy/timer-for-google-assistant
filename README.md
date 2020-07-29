@@ -53,7 +53,78 @@ If `targetState` is set to `false` (i.e., OFF), the device will be first turned 
 If `targetState` is set to `true` (i.e., ON), it will do the opposite. The device will be first turned `OFF` upon receiving this command. After the specified time has elapsed, the device will be turned `ON`. 
 
 
-## Prerequisites
+## Using Docker
+
+**Timer for Google Assistant** is available as a [Docker image](https://hub.docker.com/r/wiseindy/timer-for-google-assistant).
+
+### Prerequisites
+
+* An internet facing server (so that IFTTT can make requests to your server)
+* [Docker](https://www.docker.com/) installed on this server.
+
+#### Running with `docker`
+
+Run the following command on your server to get this application up and running. The application runs on port `3000` internally. The command below makes the API available externally on port `3020`.
+
+[For information on what the environment variables mean, see this section below.](#create-a-env-file-in-the-root-directory-sample-values-can-be-seen-in-envexample)
+
+```bash
+docker run \
+  -e SECURITY_KEY="ChangeThisToSomethingSecure" \
+  -e IFTTT_EVENT_OFF_SUFFIX="_off" \
+  -e IFTTT_EVENT_ON_SUFFIX="_on" \
+  -e IFTTT_EVENT_KEY="xxxxxxxxxxxxxxxxxxxxxx" \
+-p 3020:3000 wiseindy/timer-for-google-assistant
+```
+
+You can also specify the environment variables in a separate file, for example, `my_env_data`.
+
+```
+SECURITY_KEY=ChangeThisToSomethingSecure
+IFTTT_EVENT_OFF_SUFFIX=_off
+IFTTT_EVENT_ON_SUFFIX=_on
+IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
+```
+
+Now you can use a simpler command:
+
+```bash
+docker run --env-file ./my_env_data -p 3020:3000 wiseindy/timer-for-google-assistant
+```
+
+#### Running with `docker-compose`
+
+If using docker compose, download the [sample `docker-compose.yml` in this project](docker-compose.yml). Set the environment variables under the `environment` section to appropriate values.
+
+```yaml
+    ...
+    environment:
+      - SECURITY_KEY=ChangeThisToSomethingSecure
+      - IFTTT_EVENT_OFF_SUFFIX=_off
+      - IFTTT_EVENT_ON_SUFFIX=_on
+      - IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
+    ...
+```
+
+[For information on what the environment variables mean, see this section below.](#create-a-env-file-in-the-root-directory-sample-values-can-be-seen-in-envexample)
+
+To start the server, run:
+
+```bash
+docker-compose up -d
+```
+
+To stop, run:
+
+```bash
+docker-compose down
+```
+
+Next, you'll need to set up triggers and actions in IFTTT. [Jump to section](#integrate-with-ifttt).
+
+## If not using Docker
+
+### Prerequisites
 
 * An internet facing web server (so that IFTTT can make requests to your server)
 * [NodeJS](https://nodejs.org/en/) 12.18.3 or higher (lower versions may also work, but I haven't tested it)
@@ -77,25 +148,21 @@ npm install
 ### Create a `.env` file in the root directory. Sample values can be seen in `.env.example`
 
 ``` bash
-PORT=3000
+PORT=3020
 SECURITY_KEY=ChangeThisToSomethingSecure
 IFTTT_EVENT_OFF_SUFFIX=_off
 IFTTT_EVENT_ON_SUFFIX=_on
 IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ```
 
-* `PORT` : This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy.
-* `SECURITY_KEY` : Set this to a **unique** string and **do not share it with anyone**.
-
+* `PORT` : (DEFAULT: `3000`, if not specified) This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy.
+* `SECURITY_KEY` : (REQUIRED) Set this to a **unique** string and **do not share it with anyone**.
 ``` diff
-
-* IMPORTANT! Make sure you change your SECURITY KEY to something secure and DO NOT use the default value.
-
+- IMPORTANT! Make sure you change your SECURITY KEY to something secure and DO NOT use the default value.
 ```
-
-* `IFTTT_EVENT_OFF_SUFFIX` : The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
-* `IFTTT_EVENT_ON_SUFFIX` : The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
-* `IFTTT_EVENT_KEY` : You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.\
+* `IFTTT_EVENT_OFF_SUFFIX` : (REQUIRED) The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
+* `IFTTT_EVENT_ON_SUFFIX` : (REQUIRED) The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
+* `IFTTT_EVENT_KEY` : (REQUIRED) You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.\
 \
 ![IFTTT Webhooks page screenshot](/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
 \
