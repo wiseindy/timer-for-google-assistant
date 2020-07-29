@@ -1,5 +1,20 @@
 ![Timer for Google Assistant](/assets/timer-for-google-assistant.png?raw=true "Timer for Google Assistant")
 
+<p align="center">
+  <a href="https://hub.docker.com/repository/docker/wiseindy/timer-for-google-assistant">
+    <img src="https://img.shields.io/docker/cloud/automated/wiseindy/timer-for-google-assistant" />
+  </a>
+  <a href="https://hub.docker.com/repository/docker/wiseindy/timer-for-google-assistant">
+    <img src="https://img.shields.io/docker/cloud/build/wiseindy/timer-for-google-assistant" />
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/wiseindy/timer-for-google-assistant" />
+  </a>
+  <a href="https://github.com/wiseindy/timer-for-google-assistant/stargazers">
+    <img src="https://img.shields.io/github/stars/wiseindy/timer-for-google-assistant?style=social" />
+  </a>
+</p>
+
 ## Description
 
 Wouldn't it be cool if you could say stuff like:
