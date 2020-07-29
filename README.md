@@ -31,12 +31,12 @@ There are 2 ways to set it up:
 ### Request body
 
 Content type: `application/json`
-| Name                    | Type      | Required | Default value | Description                                                                                 |
-|:------------------------|:----------|:---------|:--------------|:--------------------------------------------------------------------------------------------|
-| *key*                   | `string`  | **Yes**  | -             | This key should be the match the key specified while setting up the server.                 |
-| *durationInMinutes*     | `number`  | **Yes**  | -             | Number of minutes after which the action should be triggered.                               | 
-| *deviceName*            | `string`  | **Yes**  | -             | Name of the target device.                                                                  |
-| *targetState*           | `boolean` | No       | `false`       | What should the state of the device be *after* firing the event? `true` = ON; `false` = OFF | 
+| Name                    | Type      | Required | Default value | Description                                                                                            |
+|:------------------------|:----------|:---------|:--------------|:-------------------------------------------------------------------------------------------------------|
+| *key*                   | `string`  | **Yes**  | -             | This key can be any value, however, it should the match the key specified while setting up the server. |
+| *durationInMinutes*     | `number`  | **Yes**  | -             | Number of minutes after which the action should be triggered.                                          | 
+| *deviceName*            | `string`  | **Yes**  | -             | Name of the target device.                                                                             |
+| *targetState*           | `boolean` | No       | `false`       | What should the state of the device be *after* firing the event? `true` = ON; `false` = OFF            | 
 
 #### Example
 
