@@ -17,6 +17,11 @@ Well, this project makes it possible. **Timer for Google Assistant** allows you 
 This application is built using [NestJS - A progressive Node.js framework](https://nestjs.com/).
 It uses [IFTTT](https://ifttt.com/) to communicate with Google Assistant and your smart device.
 
+There are 2 ways to set it up:
+
+1. [Install using Docker](#install-using-docker) (recommended)
+2. [Manual installation without Docker](#manual-installation-without-docker)
+
 ## API Reference
 
 ### Usage
@@ -53,7 +58,7 @@ If `targetState` is set to `false` (i.e., OFF), the device will be first turned 
 If `targetState` is set to `true` (i.e., ON), it will do the opposite. The device will be first turned `OFF` upon receiving this command. After the specified time has elapsed, the device will be turned `ON`. 
 
 
-## Using Docker
+## Install using Docker
 
 **Timer for Google Assistant** is available as a [Docker image](https://hub.docker.com/r/wiseindy/timer-for-google-assistant).
 
@@ -122,7 +127,7 @@ docker-compose down
 
 Next, you'll need to set up triggers and actions in IFTTT. [Jump to section](#integrate-with-ifttt).
 
-## If not using Docker
+## Manual installation without Docker
 
 ### Prerequisites
 
