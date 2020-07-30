@@ -181,7 +181,7 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 - IMPORTANT! Make sure you change your SECURITY KEY to something secure and DO NOT use the default value.
 ```
 * `IFTTT_EVENT_OFF_SUFFIX` : (REQUIRED) The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
-* `IFTTT_EVENT_ON_SUFFIX` : (REQUIRED) The suffix for the "off" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
+* `IFTTT_EVENT_ON_SUFFIX` : (REQUIRED) The suffix for the "on" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
 * `IFTTT_EVENT_KEY` : (REQUIRED) You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.\
 \
 ![IFTTT Webhooks page screenshot](/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
