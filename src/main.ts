@@ -9,11 +9,11 @@ async function bootstrap() {
   const configService: ConfigService = app.get(ConfigService);
   const port = configService.get<number>('PORT') || 3000
 
+  app.use(helmet);
   app.useGlobalPipes(new ValidationPipe({
     forbidUnknownValues: true,
     disableErrorMessages: true,
   }));
-  app.use(helmet());
   app.enableCors();
 
   await app.listen(port);
