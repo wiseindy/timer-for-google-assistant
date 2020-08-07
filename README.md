@@ -188,6 +188,12 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 \
 ![IFTTT Webhooks key page screenshot](/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
 
+### Build the application
+
+```bash
+npm run build
+```
+
 ### Start the application
 
 ``` bash
