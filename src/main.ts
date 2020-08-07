@@ -1,15 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import * as helmet from 'helmet';
 import { ConfigService } from '@nestjs/config';
+const helmet = require('helmet')
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService: ConfigService = app.get(ConfigService);
   const port = configService.get<number>('PORT') || 3000
 
-  app.use(helmet);
+  app.use(helmet());
   app.useGlobalPipes(new ValidationPipe({
     forbidUnknownValues: true,
     disableErrorMessages: true,
