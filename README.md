@@ -15,6 +15,10 @@
   </a>
 </p>
 
+<p align="center">
+  <a href="https://www.buymeacoffee.com/wiseindy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+</p>
+
 ## Description
 
 Wouldn't it be cool if you could say stuff like:
@@ -300,6 +304,10 @@ npm run test:e2e
 # test coverage
 npm run test:cov
 ```
+
+## Support
+
+<a href="https://www.buymeacoffee.com/wiseindy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 ## Author
 
