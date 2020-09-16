@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv bash
+npm run --prefix /usr/src/app start:prod
