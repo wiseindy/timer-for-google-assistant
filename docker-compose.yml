@@ -1,12 +1,24 @@
-version: "3.0"
-services:
-  timer:
-    image: wiseindy/timer-for-google-assistant
-    restart: always
-    environment:
-      - SECURITY_KEY=ChangeThisToSomethingSecure
-      - IFTTT_EVENT_OFF_SUFFIX=_off
-      - IFTTT_EVENT_ON_SUFFIX=_on
-      - IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
-    ports:
-      - "3020:3000"
+---
+  version: "3.8"
+  services:
+    googletimer:
+      image: wiseindy/timer-for-google-assistant
+      container_name: googletimer
+      secrets:
+        - googletimer_security_key
+        - googletimer_ifttt_event_key
+      environment:
+        - SECURITY_KEY=ChangeThisToSomethingSecure
+        - IFTTT_EVENT_OFF_SUFFIX=_off
+        - IFTTT_EVENT_ON_SUFFIX=_on
+        - IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
+      ports:
+        - 3020:3000
+      restart: unless-stopped
+  
+  secrets:
+    googletimer_security_key:
+      file: ./security_key.secret
+    googletimer_ifttt_event_key:
+      file: ./ifttt_event_key.secret
+  ...
