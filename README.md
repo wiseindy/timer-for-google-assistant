@@ -175,7 +175,7 @@ IFTTT_EVENT_ON_SUFFIX=_on
 IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ```
 
-* `PORT` : (DEFAULT: `3000`, if not specified) This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy.
+* `PORT` : (DEFAULT: `3000`, if not specified) This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy. If you're using the docker image, this is the port used by the app, not the one exposed by the container; remember to change your port value accordingly in the docker command or your docker-compose.
 * `SECURITY_KEY` : (REQUIRED) Set this to a **unique** string and **do not share it with anyone**.
 ``` diff
 - IMPORTANT! Make sure you change your SECURITY KEY to something secure and DO NOT use the default value.
@@ -187,6 +187,8 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ![IFTTT Webhooks page screenshot](/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
 \
 ![IFTTT Webhooks key page screenshot](/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
+
+While deploying with docker, any environment variable can be prefixed with FILE__ (two underscores) to be used with docker secrets (recommended for SECURITY_KEY and IFTTT_EVENT_KEY).
 
 ### Build the application
 
