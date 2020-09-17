@@ -22,13 +22,6 @@ ARG OVERLAY_VERSION="v2.0.0.1"
 ARG OVERLAY_ARCH="amd64"
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
-WORKDIR /app
-COPY --from=cloner /app/package*.json ./
-RUN npm install --only=production
-
-COPY --from=cloner /app ./
-COPY --from=builder /app/dist ./dist
-
 ADD https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-${OVERLAY_ARCH}.tar.gz /tmp/
 RUN \
   echo "**** lines from linuxserver.io base image ****" && \
@@ -51,6 +44,13 @@ RUN \
 	/tmp/* \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
+
+WORKDIR /app
+COPY --from=cloner /app/package*.json ./
+RUN npm install --only=production
+
+COPY --from=cloner /app ./
+COPY --from=builder /app/dist ./dist
 
 COPY root/ /
 
