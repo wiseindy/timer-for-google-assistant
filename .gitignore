@@ -5,6 +5,9 @@
 # Configuration
 .env
 
+# Secrets
+*.secret
+
 # Logs
 logs
 *.log
