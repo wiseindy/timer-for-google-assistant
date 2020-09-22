@@ -20,6 +20,7 @@
         - 3020:3333
       restart: unless-stopped
   
+  # If not using secrets, remove this section
   secrets:
     timer_security_key:
       file: ./security_key.secret
