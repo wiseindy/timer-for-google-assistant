@@ -8,7 +8,6 @@ RUN apk add --no-cache --virtual=build-dependencies --upgrade \
 
 RUN \
   echo "**** convert line endings from crlf to lf ****" && \
-  find ./root/ -type f -print0 && \
   find ./root/ -type f -print0 | xargs -0 dos2unix -- && \
   echo "**** fix file permissions ****" && \
   chmod -R a+x ./root
