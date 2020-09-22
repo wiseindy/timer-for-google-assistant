@@ -1,0 +1,7 @@
+.git
+.cache
+app
+**/*.md
+.gitignore
+docker-compose.yaml
+LICENSE

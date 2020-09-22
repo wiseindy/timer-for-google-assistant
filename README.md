@@ -1,4 +1,4 @@
-![Timer for Google Assistant](/assets/timer-for-google-assistant.png?raw=true "Timer for Google Assistant")
+![Timer for Google Assistant](/app/assets/timer-for-google-assistant.png?raw=true "Timer for Google Assistant")
 
 <p align="center">
   <a href="https://hub.docker.com/r/wiseindy/timer-for-google-assistant">
@@ -175,7 +175,7 @@ IFTTT_EVENT_ON_SUFFIX=_on
 IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ```
 
-* `PORT` : (DEFAULT: `3000`, if not specified) This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy.
+* `PORT` : (DEFAULT: `3000`, if not specified) This is the port number the application will use. You'll need to add this exception to your firewall rule. You can also use a reverse proxy. If you're using the docker image, this is the port used by the app, not the one exposed by the container; remember to change your port value accordingly in the docker command or your docker-compose.
 * `SECURITY_KEY` : (REQUIRED) Set this to a **unique** string and **do not share it with anyone**.
 ``` diff
 - IMPORTANT! Make sure you change your SECURITY KEY to something secure and DO NOT use the default value.
@@ -184,9 +184,11 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 * `IFTTT_EVENT_ON_SUFFIX` : (REQUIRED) The suffix for the "on" action in IFTTT. For more details, please view [Integrate with IFTTT](#integrate-with-ifttt) section below.
 * `IFTTT_EVENT_KEY` : (REQUIRED) You can get your IFTTT key from [https://ifttt.com/maker_webhooks](https://ifttt.com/maker_webhooks). Click the **Documentation** button at the top to get your key.\
 \
-![IFTTT Webhooks page screenshot](/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
+![IFTTT Webhooks page screenshot](/app/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
 \
-![IFTTT Webhooks key page screenshot](/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
+![IFTTT Webhooks key page screenshot](/app/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
+
+While deploying with docker, any environment variable can be prefixed with FILE__ (two underscores) to be used with docker secrets (recommended for SECURITY_KEY and IFTTT_EVENT_KEY).
 
 ### Build the application
 
@@ -214,7 +216,7 @@ Both these actions/applets will work by receiving a web request and triggering t
 
 1. Login to your [IFTTT](https://ifttt.com/) and create a new applet. For the `this` trigger, choose `Webhooks`.\
 \
-![IFTTT create a new applet](/assets/ifttt_webhooks_create.gif?raw=true "IFTTT create a new applet")
+![IFTTT create a new applet](/app/assets/ifttt_webhooks_create.gif?raw=true "IFTTT create a new applet")
 
 2. Follow a consistent naming scheme for all events. Use the correct suffixes for your device events as specified in the `IFTTT_EVENT_OFF_SUFFIX` and `IFTTT_EVENT_ON_SUFFIX` parameters in the `.env` file above.\
 \
@@ -222,11 +224,11 @@ For example, if the device is a smart light, use `lights_off` and `lights_on` as
 \
 **Make sure you follow the SAME naming scheme for ALL events (they're case sensitive)**. \
 \
-![IFTTT name your event](/assets/ifttt_webhooks_trigger_event_name.gif?raw=true "IFTTT name your event")
+![IFTTT name your event](/app/assets/ifttt_webhooks_trigger_event_name.gif?raw=true "IFTTT name your event")
 
 3. Next, choose your smart device from the list and select the action you'd like to carry out.\
 \
-![IFTTT set event target](/assets/ifttt_webhooks_trigger_event_target.gif?raw=true "IFTTT set event target")
+![IFTTT set event target](/app/assets/ifttt_webhooks_trigger_event_target.gif?raw=true "IFTTT set event target")
 
 4. Repeat the above steps to create the `ON` trigger for your device.
 
@@ -234,19 +236,19 @@ For example, if the device is a smart light, use `lights_off` and `lights_on` as
 
 1. Create a new applet/action in IFTTT. For the `this` trigger, choose `Google Assistant`.\
 \
-![IFTTT create a new Google Assistant applet](/assets/ifttt_webhooks_create_google_assistant.gif?raw=true "IFTTT create a new Google Assistant applet")
+![IFTTT create a new Google Assistant applet](/app/assets/ifttt_webhooks_create_google_assistant.gif?raw=true "IFTTT create a new Google Assistant applet")
 
 2. Select **Say a phrase with a number**\
 \
-![IFTTT Google Assistant applet](/assets/ifttt_google_assistant.gif?raw=true "IFTTT Google Assistant applet")
+![IFTTT Google Assistant applet](/app/assets/ifttt_google_assistant.gif?raw=true "IFTTT Google Assistant applet")
 
 3. Set your trigger phrase and the response. In this example, I want Google Assistant to turn on the lights and then turn it off after X minutes. Use `#` to specify where you'll say the number of minutes.\
 \
-![IFTTT Google Assistant number trigger](/assets/ifttt_google_assistant_number_trigger.png?raw=true "IFTTT Google Assistant number trigger")
+![IFTTT Google Assistant number trigger](/app/assets/ifttt_google_assistant_number_trigger.png?raw=true "IFTTT Google Assistant number trigger")
 
 4. For the `that` action in your applet, select `Webhooks`. This will be used to make a web request to your server.\
 \
-![IFTTT set target to webhooks web request](/assets/ifttt_google_assistant_trigger_event_target.gif?raw=true "IFTTT set target to webhooks web request")
+![IFTTT set target to webhooks web request](/app/assets/ifttt_google_assistant_trigger_event_target.gif?raw=true "IFTTT set target to webhooks web request")
 
 5. Fill the action fields with the following values. For more information, refer to the [API Reference](#api-reference) below.\
 \
@@ -256,7 +258,7 @@ Set the web request method to `POST`.\
 Select `application/json` as Content Type.\
 For the Body parameter, specify the following values:\
 \
-![IFTTT web request action](/assets/ifttt_webhooks_make_http_request.png?raw=true "IFTTT web request action")
+![IFTTT web request action](/app/assets/ifttt_webhooks_make_http_request.png?raw=true "IFTTT web request action")
 
 Sample request body:
 
