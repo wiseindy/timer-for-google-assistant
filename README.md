@@ -114,15 +114,43 @@ docker run --env-file ./my_env_data -p 3020:3000 wiseindy/timer-for-google-assis
 
 #### Running with `docker-compose`
 
-If using docker compose, download the [sample `docker-compose.yml` in this project](docker-compose.yml). Set the environment variables under the `environment` section to appropriate values.
+If using docker compose, download the [sample `docker-compose.yml` in this project](docker-compose.yml).
+
+* **Add your keys to `docker-compose.yml`**
+\
+Create two files `ifttt_event_key.secret` and `security_key.secret` which contain your IFTTT event key and security key respectively.
+\
+When deploying with docker, any environment variable can be prefixed with `FILE__` (two underscores) to be used with docker secrets (recommended for `SECURITY_KEY` and `IFTTT_EVENT_KEY`).
 
 ```yaml
     ...
     environment:
-      - SECURITY_KEY=ChangeThisToSomethingSecure
-      - IFTTT_EVENT_OFF_SUFFIX=_off
-      - IFTTT_EVENT_ON_SUFFIX=_on
-      - IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
+        FILE__SECURITY_KEY: /run/secrets/timer_security_key
+        FILE__IFTTT_EVENT_KEY: /run/secrets/timer_ifttt_event_key
+        IFTTT_EVENT_OFF_SUFFIX: _off
+        IFTTT_EVENT_ON_SUFFIX: _on
+        
+  secrets:
+    timer_security_key:
+      file: ./security_key.secret
+    timer_ifttt_event_key:
+      file: ./ifttt_event_key.secret
+  ...
+```
+
+* **[NOT RECOMMENDED] Another way to add your keys to `docker-compose.yml`**
+\
+An alternative to using Docker secrets is to directly include the keys in your `docker-compose.yml` file. The above technique of using secrets is more secure and recommended over this method.
+\
+Instead of using secrets in separate files, you can directly set the environment variables under the `environment` section to appropriate values.
+
+```yaml
+    ...
+    environment:
+        SECURITY_KEY: ChangeThisToSomethingSecure
+        IFTTT_EVENT_KEY: xxxxxxxxxxxxxxxxxxxxxx
+        IFTTT_EVENT_OFF_SUFFIX: _off
+        IFTTT_EVENT_ON_SUFFIX: _on
     ...
 ```
 
@@ -161,7 +189,7 @@ git clone https://github.com/wiseindy/timer-for-google-assistant.git
 ### Enter the directory and run `npm install`
 
 ``` bash
-cd timer-for-google-assistant
+cd timer-for-google-assistant/app
 npm install
 ```
 
@@ -187,8 +215,6 @@ IFTTT_EVENT_KEY=xxxxxxxxxxxxxxxxxxxxxx
 ![IFTTT Webhooks page screenshot](/app/assets/ifttt_maker_webhooks.png?raw=true "IFTTT Webhooks")
 \
 ![IFTTT Webhooks key page screenshot](/app/assets/ifttt_maker_webhooks_key.png?raw=true "IFTTT Webhooks key")
-
-While deploying with docker, any environment variable can be prefixed with FILE__ (two underscores) to be used with docker secrets (recommended for SECURITY_KEY and IFTTT_EVENT_KEY).
 
 ### Build the application
 
