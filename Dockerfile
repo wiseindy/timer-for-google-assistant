@@ -1,16 +1,24 @@
 FROM alpine AS cloner
 WORKDIR /app
+
 RUN apk add --no-cache --virtual=build-dependencies --upgrade \
         git && \
     git clone https://github.com/wiseindy/timer-for-google-assistant.git . && \
     rm -rf .git
 
+RUN \
+  echo "**** convert line endings from crlf to lf ****" && \
+  find ./root/ -type f -print0 && \
+  find ./root/ -type f -print0 | xargs -0 dos2unix -- && \
+  echo "**** fix file permissions ****" && \
+  chmod -R a+x ./root
+
 FROM node:12 AS builder
 WORKDIR /app
-COPY --from=cloner /app/package*.json ./
+COPY --from=cloner /app/app/package*.json ./
 RUN npm install
 
-COPY --from=cloner /app ./
+COPY --from=cloner /app/app ./
 RUN npm run build
 
 FROM node:12-slim AS production
@@ -46,13 +54,12 @@ RUN \
 	/var/tmp/*
 
 WORKDIR /app
-COPY --from=cloner /app/package*.json ./
+COPY --from=cloner /app/app/package*.json ./
 RUN npm install --only=production
 
-COPY --from=cloner /app ./
+COPY --from=cloner /app/app ./
+COPY --from=cloner /app/root /
 COPY --from=builder /app/dist ./dist
-
-COPY root/ /
 
 ENTRYPOINT ["/init"]
 EXPOSE 3000
