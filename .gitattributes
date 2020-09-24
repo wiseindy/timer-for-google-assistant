@@ -20,7 +20,7 @@ Dockerfile
 *.jspx          text
 *.md            text
 *.properties    text
-*.sh            text
+*.sh            text eol=lf
 *.tld           text
 *.txt           text
 *.tag           text
