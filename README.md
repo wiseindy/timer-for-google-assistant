@@ -193,7 +193,7 @@ cd timer-for-google-assistant/app
 npm install
 ```
 
-### Create a `.env` file in the root directory. Sample values can be seen in `.env.example`
+### Create a `.env` file in the `/app` directory. Sample values can be seen in `/app/.env.example`
 
 ``` bash
 PORT=3020
