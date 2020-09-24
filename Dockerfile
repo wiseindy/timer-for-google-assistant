@@ -4,13 +4,8 @@ WORKDIR /app
 RUN apk add --no-cache --virtual=build-dependencies --upgrade \
         git && \
     git clone https://github.com/wiseindy/timer-for-google-assistant.git . && \
+    git checkout dev && \
     rm -rf .git
-
-RUN \
-  echo "**** convert line endings from crlf to lf ****" && \
-  find ./root/ -type f -print0 | xargs -0 dos2unix -- && \
-  echo "**** fix file permissions ****" && \
-  chmod -R a+x ./root
 
 FROM node:12 AS builder
 WORKDIR /app
@@ -25,7 +20,7 @@ ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 # set version for s6 overlay
-ARG OVERLAY_VERSION="v2.0.0.1"
+ARG OVERLAY_VERSION="v2.1.0.0"
 ARG OVERLAY_ARCH="amd64"
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
